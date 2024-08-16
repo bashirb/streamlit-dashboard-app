@@ -5,8 +5,13 @@ import os
 import streamlit as st
 import snowflake.connector
 import pandas as pd
+from dotenv import load_dotenv
+import altair as alt
 
 
+
+# Load environment variables from .env file
+load_dotenv()
 
 #Snowflake connection
 def _get_snowflake_connection():
@@ -14,8 +19,8 @@ def _get_snowflake_connection():
         "user": "guest_ZheWNtmM", 
         "password": "ie6uVad2#", 
         "account": "ui76830.west-europe.azure", 
-        "database": "code_challenge_testuser", 
-        "schema": "source",
+        "database": "CODE_CHALLENGE_ZHEWNTMM", 
+        "schema": "SOURCE",
         "warehouse": "GUEST_CODE_CHALLENGE_ZHEWNTMM",
         "role": "GUEST_CODE_CHALLENGE_ZHEWNTMM",
     }
@@ -28,11 +33,16 @@ def run_query(query):
     conn.close()
     return df
 
-# title
-st.title("Financial Market Analysis Dashboard")
+# page layout setup
+st.set_page_config(
+    page_title="Financial Market Analysis Dashboard",
+    page_icon="📈",
+    layout="wide",
+    initial_sidebar_state="expanded")
 
 
-top_25_percent_data = """
+# top 25%
+query_top_25_percent_data = """
 -- daily poisition in usd 
 WITH daily_position AS (
     SELECT 
@@ -42,9 +52,9 @@ WITH daily_position AS (
         pr.close_usd,
         p.shares * pr.close_usd AS daily_position_usd
     FROM
-        CODE_CHALLENGE_ZHEWNTMM.SOURCE.POSITION p
+        POSITION p
     JOIN 
-        CODE_CHALLENGE_ZHEWNTMM.SOURCE.PRICE pr
+        PRICE pr
     ON p.company_id = pr.company_id AND p.date = pr.date
 ),
 -- last year's average position for each company
@@ -109,10 +119,50 @@ ORDER BY
     t.avg_position DESC;
 """
 
+query_company = """
+SELECT DISTINCT ticker
+FROM company;
+"""
+
+
 
 st.subheader("Top 25% Companies latest data")
-top_25_data = run_query(top_25_percent_data)
-st.table(top_25_data)
+top_25_data = run_query(query_top_25_percent_data)
+st.dataframe(top_25_data, use_container_width=True)
 
+# getting companies names
+df_company = run_query(query_company)
+companies_tickers = df_company['TICKER'].tolist()
 
+# select box for the companies
+selected_company = st.selectbox("Select a company", companies_tickers)
 
+# get selected company daily closing price
+query_company_daily_close_price = f"""
+SELECT p.date,c.ticker, p.close_usd
+FROM 
+    price p
+JOIN
+    company c ON p.company_id = c.id
+WHERE 
+    c.ticker = '{selected_company}'
+ORDER BY 
+    date ASC
+"""
+
+# Fetch the data for the selected company
+df_company_data = run_query(query_company_daily_close_price)
+
+# Check if there is data available for the selected company
+if not df_company_data.empty:
+    # Line chart for the selected company
+    line_chart = alt.Chart(df_company_data).mark_line().encode(
+        x='DATE:T',
+        y='CLOSE_USD:Q',
+        tooltip=['DATE:T', 'CLOSE_USD:Q']
+    ).properties(
+        title=f"Daily Close Price for {selected_company}"
+    )
+    st.altair_chart(line_chart, use_container_width=True)
+else:
+    st.warning("No data available for the selected company.")
