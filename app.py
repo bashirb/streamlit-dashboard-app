@@ -1,6 +1,20 @@
 
+
+
+
+
+
+
 ## adding the packages to the requirements.txt file
 ## pip freeze > requirements.txt
+
+
+
+
+
+
+
+
 import os
 import streamlit as st
 import snowflake.connector
@@ -124,15 +138,20 @@ SELECT DISTINCT ticker
 FROM company;
 """
 
-
-
+## Q2 - Top 25% Companies latest data
 st.subheader("Top 25% Companies latest data")
 top_25_data = run_query(query_top_25_percent_data)
 st.dataframe(top_25_data, use_container_width=True)
 
+
+## Q3 - Daily close price timeseries
+
 # getting companies names
 df_company = run_query(query_company)
 companies_tickers = df_company['TICKER'].tolist()
+
+# title
+st.subheader("Daily close price timeseries for the selected company")
 
 # select box for the companies
 selected_company = st.selectbox("Select a company", companies_tickers)
