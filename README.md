@@ -70,9 +70,9 @@ To run this project locally, follow these steps:
 
 Once the app is running, you can explore various sections of the dashboard:
 
-Top 10 Sectors by Position (USD): View the top 10 sectors based on financial positions.
-Top 25% Companies Latest Data: Examine the latest data for the top 25% of companies.
-Daily Close Price Timeseries: Select a company from the dropdown to view its daily closing price over time.
+- Top 10 Sectors by Position (USD): View the top 10 sectors based on financial positions.
+- Top 25% Companies Latest Data: Examine the latest data for the top 25% of companies.
+- Daily Close Price Timeseries: Select a company from the dropdown to view its daily closing price over time.
 
 ## Project files
 
