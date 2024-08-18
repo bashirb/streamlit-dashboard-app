@@ -18,22 +18,22 @@ This repository contains a Streamlit-based web application that provides a finan
 
 To run this project locally, follow these steps:
 
-1. **Clone the Repository**
+1.  **Clone the Repository**
 
-   First, clone the repository to your local machine and navigate into the project directory:
+    First, clone the repository to your local machine and navigate into the project directory:
 
-   ```bash
-   git clone https://github.com/bashirb/streamlit-dashboard-app.git
-   cd streamlit-dashboard-app
+    ```bash
+    git clone https://github.com/bashirb/streamlit-dashboard-app.git
+    cd streamlit-dashboard-app
 
-   ```
+    ```
 
-2. **Create and Activate a Virtual Environment (Optional but Recommended)**
+2.  **Create and Activate a Virtual Environment (Optional but Recommended)**
 
-It's recommended to create a virtual environment to manage the project's dependencies in isolation:
+    It's recommended to create a virtual environment to manage the project's dependencies in isolation:
 
     python3 -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+    source venv/bin/activate # On Windows, use `venv\Scripts\activate`
 
 3.  **Install Required Packages**
     Install the necessary Python packages specified in the requirements.txt file:
