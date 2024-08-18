@@ -32,8 +32,8 @@ To run this project locally, follow these steps:
 
     It's recommended to create a virtual environment to manage the project's dependencies in isolation:
 
-    python3 -m venv venv
-    source venv/bin/activate # On Windows, use `venv\Scripts\activate`
+        python3 -m venv venv
+        source venv/bin/activate # On Windows, use `venv\Scripts\activate`
 
 3.  **Install Required Packages**
     Install the necessary Python packages specified in the requirements.txt file:
