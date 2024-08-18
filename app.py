@@ -53,7 +53,7 @@ def run_query(query):
 st.subheader("Top 10 Sectors by Position (USD)")
 
 # load the query from the file
-top_10_sectors_data = load_query_from_file('top_10_sectors.sql')
+top_10_sectors_data = load_query_from_file('queries/top_10_sectors.sql')
 
 # query the top 10 sectors
 top_10_sectors_df = run_query(top_10_sectors_data)
@@ -113,7 +113,7 @@ st.divider()
 st.subheader("Top 25% Companies latest data")
 
 # load the data from file
-top_25_percent_query = load_query_from_file('top_25_percent_data.sql')
+top_25_percent_query = load_query_from_file('queries/top_25_percent_data.sql')
 
 # query the top 25% from snowflake
 top_25_data = run_query(top_25_percent_query)
@@ -126,7 +126,7 @@ st.divider()
 ######### Q3 - Daily close price timeseries #########
 
 # getting companies tickers
-companies_names = load_query_from_file('companies_names.sql')
+companies_names = load_query_from_file('queries/companies_names.sql')
 
 # getting companies tickers
 df_company = run_query(companies_names)
