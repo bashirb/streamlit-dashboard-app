@@ -48,7 +48,7 @@ To run this project locally, follow these steps:
         user_name=your_username
         password=your_password
 
-Replace your_username and your_password with your actual Snowflake credentials. The app will read these values when it runs, ensuring secure access to the database.
+    Replace your_username and your_password with your actual Snowflake credentials. The app will read these values when it runs, ensuring secure access to the database.
 
 5.  **Run the Application**
     Start the Streamlit application using the following command:
