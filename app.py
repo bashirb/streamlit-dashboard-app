@@ -47,3 +47,63 @@ def run_query(query):
     return df
 
 
+## Q1 - Top 10 Sectors by Position
+
+# title
+st.subheader("Top 10 Sectors by Position (USD)")
+
+# load the query from the file
+top_10_sectors_data = load_query_from_file('top_10_sectors.sql')
+
+# query the top 10 sectors
+top_10_sectors_df = run_query(top_10_sectors_data)
+
+if not top_10_sectors_df.empty:
+    # create the chart
+    chart = alt.Chart(top_10_sectors_df).mark_bar().encode(
+        y=alt.Y(
+            'SECTOR_NAME:N', 
+            title='Sector Name', 
+            sort='-x', 
+            axis=alt.Axis(labelLimit=300)  # Increase the space allowed for the sector names
+        ),
+        x=alt.X(
+            'SECTOR_POSITION_USD:Q', 
+            title='Sector Position (USD)', 
+            scale=alt.Scale(type='log'),
+            axis=alt.Axis(grid=False, labels=False)  # Remove gridlines and labels        
+        ),
+        color=alt.Color(
+            'SECTOR_POSITION_USD:Q', 
+            scale=alt.Scale(
+                range=['#c6dbef', '#08306b'],  # Light to dark blue shades for the gradient
+                type='linear'
+            ),
+            legend=None  # Hide legend
+        ),
+        tooltip=[
+            alt.Tooltip('SECTOR_NAME:N', title='Sector Name'),
+            alt.Tooltip('SECTOR_POSITION_USD:Q', title='Position (USD)', format='$,.2f')
+        ]
+    ).properties(
+        title='From highest to lowest',
+    ).interactive()
+
+    # Add text labels on the bars
+    text = chart.mark_text(
+        align='left',
+        baseline='middle',
+        dx=3  # Adjust the distance of the text from the bars
+    ).encode(
+        text=alt.Text('SECTOR_POSITION_USD:Q', format='$,.2f')  # Format the text as USD
+    )
+    final_chart = chart + text
+
+    # Display the chart 
+    st.altair_chart(final_chart, use_container_width=True)
+
+else:
+    st.write("Refresh page to get the data")
+
+
+st.divider()
