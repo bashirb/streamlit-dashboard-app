@@ -107,3 +107,18 @@ else:
 
 
 st.divider()
+
+
+######### Q2 - Top 25% Companies latest data  #########
+st.subheader("Top 25% Companies latest data")
+
+# load the data from file
+top_25_percent_query = load_query_from_file('top_25_percent_data.sql')
+
+# query the top 25% from snowflake
+top_25_data = run_query(top_25_percent_query)
+
+# display the dataframe
+st.dataframe(top_25_data, use_container_width=True)
+
+st.divider()
