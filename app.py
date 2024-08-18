@@ -122,3 +122,48 @@ top_25_data = run_query(top_25_percent_query)
 st.dataframe(top_25_data, use_container_width=True)
 
 st.divider()
+
+######### Q3 - Daily close price timeseries #########
+
+# getting companies tickers
+companies_names = load_query_from_file('companies_names.sql')
+
+# getting companies tickers
+df_company = run_query(companies_names)
+companies_tickers = df_company['TICKER'].tolist()
+
+# title
+st.subheader("Daily close price timeseries for the selected company")
+
+# select box for the companies
+selected_company = st.selectbox("Select a company", companies_tickers)
+
+# get selected company daily closing price
+query_company_daily_close_price = f"""
+SELECT p.date,c.ticker, p.close_usd
+FROM 
+    price p
+JOIN
+    company c ON p.company_id = c.id
+WHERE 
+    c.ticker = '{selected_company}'
+ORDER BY 
+    date ASC
+"""
+
+# Fetch the data for the selected company
+df_company_data = run_query(query_company_daily_close_price)
+
+# Check if there is data available for the selected company
+if not df_company_data.empty:
+    # Line chart for the selected company
+    line_chart = alt.Chart(df_company_data).mark_line().encode(
+        x='DATE:T',
+        y='CLOSE_USD:Q',
+        tooltip=['DATE:T', 'CLOSE_USD:Q']
+    ).properties(
+        title=f"Daily Close Price for {selected_company}"
+    )
+    st.altair_chart(line_chart, use_container_width=True)
+else:
+    st.warning("No data available for the selected company.")
