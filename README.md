@@ -50,6 +50,15 @@ To run this project locally, follow these steps:
 
     Replace your_username and your_password with your actual Snowflake credentials. The app will read these values when it runs, ensuring secure access to the database.
 
+    **Important Note:**
+    The credentials provided are specifically relevant to the following Snowflake database configuration:
+
+        Account: ui76830.west-europe.azure
+        Database: CODE_CHALLENGE_ZHEWNTMM
+        Schema: SOURCE
+        Warehouse: GUEST_CODE_CHALLENGE_ZHEWNTMM
+        Role: GUEST_CODE_CHALLENGE_ZHEWNTMM
+
 5.  **Run the Application**
     Start the Streamlit application using the following command:
 
