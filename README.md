@@ -4,7 +4,6 @@ This repository contains a Streamlit-based web application that provides a finan
 
 ![app_gif](https://github.com/user-attachments/assets/02a8dedc-af6a-4ad3-ac57-be69add2344b)
 
-
 ## Features
 
 - **Top 10 Sectors by Position (USD):** Visualizes the top 10 sectors based on their financial positions.
@@ -21,7 +20,16 @@ This repository contains a Streamlit-based web application that provides a finan
 
 To run this project locally, follow these steps:
 
-1.  **Clone the Repository**
+1.  **Ensure You Have Python 3 or Above**
+
+    Make sure you have Python 3.9 or above installed on your system. You can check your Python version by running:
+
+    ```bash
+    python --version
+
+    ```
+
+2.  **Clone the Repository**
 
     First, clone the repository to your local machine and navigate into the project directory:
 
@@ -31,21 +39,23 @@ To run this project locally, follow these steps:
 
     ```
 
-2.  **Create and Activate a Virtual Environment (Optional but Recommended)**
+3.  **Create and Activate a Virtual Environment (Optional but Recommended)**
 
     It's recommended to create a virtual environment to manage the project's dependencies in isolation:
 
         python3 -m venv venv
         source venv/bin/activate # On Windows, use `venv\Scripts\activate`
 
-3.  **Install Required Packages**
+4.  **Install Required Packages**
+
     Install the necessary Python packages specified in the requirements.txt file:
 
         pip install -r requirements.txt
 
     This command will install all the libraries required for the project, such as Streamlit, Snowflake connector, Pandas, and Altair.
 
-4.  **Set Up Snowflake Credentials**
+5.  **Set Up Snowflake Credentials**
+
     The app connects to a Snowflake database using credentials that need to be set in an .env file. Create a .env file in the root directory of the project and add your Snowflake username and password:
 
         user_name=your_username
@@ -54,6 +64,7 @@ To run this project locally, follow these steps:
     Replace your_username and your_password with your actual Snowflake credentials. The app will read these values when it runs, ensuring secure access to the database.
 
     **Important Note:**
+
     The credentials provided are specifically relevant to the following Snowflake database configuration:
 
         Account: ui76830.west-europe.azure
@@ -62,7 +73,8 @@ To run this project locally, follow these steps:
         Warehouse: GUEST_CODE_CHALLENGE_ZHEWNTMM
         Role: GUEST_CODE_CHALLENGE_ZHEWNTMM
 
-5.  **Run the Application**
+6.  **Run the Application**
+
     Start the Streamlit application using the following command:
 
         streamlit run app.py
