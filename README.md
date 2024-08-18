@@ -2,6 +2,8 @@
 
 This repository contains a Streamlit-based web application that provides a financial market analysis dashboard. The dashboard retrieves data from a Snowflake database and visualizes it using Altair charts. The project is structured to load SQL queries from files, execute them against a Snowflake database, and display the results interactively.
 
+![](https://github.com/bashirb/streamlit-dashboard-app/app_gif.gif)
+
 ## Features
 
 - **Top 10 Sectors by Position (USD):** Visualizes the top 10 sectors based on their financial positions.
