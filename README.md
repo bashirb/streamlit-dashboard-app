@@ -58,8 +58,8 @@ To run this project locally, follow these steps:
 
     The app connects to a Snowflake database using credentials that need to be set in an .env file. Create a .env file in the root directory of the project and add your Snowflake username and password:
 
-        user_name=your_username
-        password=your_password
+        user_name="your_username"
+        password="your_password"
 
     Replace your_username and your_password with your actual Snowflake credentials. The app will read these values when it runs, ensuring secure access to the database.
 
